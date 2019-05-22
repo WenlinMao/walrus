@@ -27,6 +27,7 @@
 // the interface of this class mimics Sun's.
 
 import mpfun.*;
+import java.math.BigDecimal;
 
 public final class H3Matrix4d
 {
