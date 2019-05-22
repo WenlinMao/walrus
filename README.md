@@ -335,12 +335,12 @@ The following process is for Mac OS X 10.11.6 users:
    In this section, the directory containing the source code will be further
    referred to as the Walrus directory.
 
-2. Ensure that your machine is using Apple's JDK 1.6 which can be
+2. Ensure that your machine is using Apple's JDK 1.8 which can be
    downloaded from <https://support.apple.com/kb/dl1572>. If your default JDK
    is not Apple's JDK 1.6 and that is the only JDK of version 1.6 that you
-   have, define the Java home environment variable to Apple's JDK 1.6.
+   have, define the Java home environment variable to Apple's JDK 1.8.
 
-         export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
+         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
    If your default JDK is not Apple's JDK 1.6 and you have multiple JDKs of
    version 1.6, examine all JDKs you have installed.
@@ -360,7 +360,7 @@ The following process is for Mac OS X 10.11.6 users:
    environment variable. If each jar file was one directory above the
    Walrus directory, the command would be:
 
-         export CLASSPATH=../antlrall-mod.jar:../libsea.jar:../mp.jar:.
+         export CLASSPATH=../antlrall-mod.jar:../libsea.jar:../mp.jar:../j3dcore.jar:../j3dutils.jar:../vecmath.jar:../jogamp-fat.jar:.
 
 4. From the Walrus directory, run this command to build Walrus:
 
@@ -371,7 +371,7 @@ The following process is for Mac OS X 10.11.6 users:
    classes. If all three JAR files were in the Walrus directory, the
    command would be:
 
-         java -cp antlrall-mod.jar:libsea.jar:mp.jar:. H3Main
+         java -cp antlrall-mod.jar:libsea.jar:mp.jar:j3dcore.jar:j3dutils.jar:vecmath.jar:jogamp-fat.jar:. H3Main
 
 6. If you wish to build a JAR file to distribute, run the following
    command:
