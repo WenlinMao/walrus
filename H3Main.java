@@ -63,7 +63,7 @@ public class H3Main {
 		// a lightweight component, the heavyweight component fails to
 		// get key events (even after being selected) until requestFocus()
 		// has been called.
-
+		System.setProperty("sun.awt.noerasebackground", "true"); 
 		new H3Main();
 	}
 
@@ -2470,6 +2470,7 @@ public class H3Main {
 
 		private void displayOnScreenLabel(int x, int y, String label) {
 			GraphicsContext3D gc = m_canvas.getGraphicsContext3D();
+			gc.clear();
 			Point3d position = new Point3d();
 			m_canvas.getPixelLocationInImagePlate(x, y, position);
 			m_parameters.drawLabel(gc, position.x, position.y, m_labelZOffsetCounter++, label);

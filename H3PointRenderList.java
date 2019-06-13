@@ -392,8 +392,8 @@ public class H3PointRenderList implements H3RenderList {
 	////////////////////////////////////////////////////////////////////////
 	// PRIVATE FIELDS
 	////////////////////////////////////////////////////////////////////////
-	// TODO: PointRenderList Debug Setting
-	private static final boolean DEBUG_PRINT = true;
+	// TODO: Debug Print
+	private static final boolean DEBUG_PRINT = false;
 
 	private static final boolean SHOW_LINKS_OF_HIDDEN_NODES = true;
 

@@ -19,7 +19,6 @@
 // ######END_HEADER######
 // 
 
-
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.util.Observer;
@@ -27,45 +26,36 @@ import java.util.Observable;
 import javax.media.j3d.*;
 import javax.vecmath.*;
 
-public class H3Canvas3D
-    extends Canvas3D
-{
-    public H3Canvas3D(GraphicsConfiguration config)
-    {
-	super(config);
+public class H3Canvas3D extends Canvas3D {
+    public H3Canvas3D(GraphicsConfiguration config) {
+        super(config);
     }
 
-    public void addPaintObserver(Observer o)
-    {
-	m_observable.addObserver(o);
+    public void addPaintObserver(Observer o) {
+        m_observable.addObserver(o);
     }
 
-    public void removePaintObserver(Observer o)
-    {
-	m_observable.deleteObserver(o);
+    public void removePaintObserver(Observer o) {
+        m_observable.deleteObserver(o);
     }
 
-    public void paint(Graphics g)
-    {
-	super.paint(g);
-	m_observable.notifyPaintObservers();
+    public void paint(Graphics g) {
+        super.paint(g);
+        m_observable.notifyPaintObservers();
     }
 
-    //=======================================================================
+    // =======================================================================
 
     private PaintObservable m_observable = new PaintObservable();
 
-    private class PaintObservable extends Observable
-    {
-	public PaintObservable()
-	{
-	    super();
-	}
+    private class PaintObservable extends Observable {
+        public PaintObservable() {
+            super();
+        }
 
-	public void notifyPaintObservers()
-	{
-	    setChanged();
-	    notifyObservers();
-	}
+        public void notifyPaintObservers() {
+            setChanged();
+            notifyObservers();
+        }
     }
 }

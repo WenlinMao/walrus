@@ -466,6 +466,7 @@ public class H3AdaptiveRenderLoop implements H3RenderLoop, Runnable {
 
 	private void beRefreshState() {
 		GraphicsContext3D gc = m_canvas.getGraphicsContext3D();
+		gc.clear();
 		m_parameters.putModelTransform(gc);
 		gc.setBufferOverride(true);
 		gc.setFrontBufferRendering(true);
@@ -482,6 +483,7 @@ public class H3AdaptiveRenderLoop implements H3RenderLoop, Runnable {
 
 	private void beCompleteInitState() {
 		GraphicsContext3D gc = m_canvas.getGraphicsContext3D();
+		gc.clear();
 		m_parameters.putModelTransform(gc);
 		gc.setBufferOverride(true);
 		gc.setFrontBufferRendering(true);
@@ -494,6 +496,7 @@ public class H3AdaptiveRenderLoop implements H3RenderLoop, Runnable {
 		m_renderer.setMaxDuration(m_maxCompletionDuration);
 
 		GraphicsContext3D gc = m_canvas.getGraphicsContext3D();
+		gc.clear();
 		while (m_state == STATE_COMPLETE) {
 			if (synchCompleteState()) {
 				m_renderer.refine(gc);
@@ -528,6 +531,7 @@ public class H3AdaptiveRenderLoop implements H3RenderLoop, Runnable {
 
 		if (m_state != STATE_COMPLETE) {
 			GraphicsContext3D gc = m_canvas.getGraphicsContext3D();
+			gc.clear();
 			gc.setBufferOverride(true);
 			gc.setFrontBufferRendering(false);
 		}
@@ -639,9 +643,9 @@ public class H3AdaptiveRenderLoop implements H3RenderLoop, Runnable {
 	////////////////////////////////////////////////////////////////////////
 	// PRIVATE FIELDS
 	////////////////////////////////////////////////////////////////////////
-	//TODO: Switch DEBUG to true
-	private static final boolean DEBUG_PRINT = true;
-	private static final boolean DEBUG_PRINT_TRANSFORMED = true;
+	//TODO: DEBUG_Print
+	private static final boolean DEBUG_PRINT = false;
+	private static final boolean DEBUG_PRINT_TRANSFORMED = false;
 
 	private static final boolean ANTIALIASING = false;
 

@@ -151,7 +151,7 @@ public class H3LineRenderer implements H3AdaptiveRenderer {
 	////////////////////////////////////////////////////////////////////////
 	// PRIVATE FIELDS
 	////////////////////////////////////////////////////////////////////////
-	//TODO: Change back
+	//TODO: DEBUG_Print
 	private static final boolean DEBUG_PRINT = false;
 	private static final int NUM_PER_ITERATION = 25;
 
