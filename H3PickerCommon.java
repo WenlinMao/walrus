@@ -56,6 +56,7 @@ public abstract class H3PickerCommon
     public void highlightNode(int x, int y)
     {
 	GraphicsContext3D gc = m_canvas.getGraphicsContext3D();
+	gc.clear();
 	boolean frontBufferRenderingState = enableFrontBufferRendering(gc);
 
 	Point3d pickedCoordinates = getPixelLocationInImagePlate(x, y);
@@ -96,6 +97,7 @@ public abstract class H3PickerCommon
     public void highlightNode(int node)
     {
 	GraphicsContext3D gc = m_canvas.getGraphicsContext3D();
+	gc.clear();
 	boolean frontBufferRenderingState = enableFrontBufferRendering(gc);
 
 	Point3d p = new Point3d();
