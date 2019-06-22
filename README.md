@@ -51,6 +51,11 @@ region, the user can examine every part of the graph in detail.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 CHANGES
 
+Since 1.0.0, released Jun 10, 2019:
+
+  * Switched deprecated Oracle Java3d 1.5 package to Java3d 1.6 package from Jogamp
+  * Modified Java3d package into custom version to fix the rendering bug
+
 Since 0.6.2, released Feb 20, 2003:
 
   * No changes to any functionality; just a licensing change to the GPL.
@@ -139,9 +144,7 @@ Since 0.1, released Dec 5, 2001:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 REQUIREMENTS
 
-Walrus requires Java3D v1.2.1 (or later) and JDK 1.5.0 (or later).
-
-Java3D:  <http://java.sun.com/products/java-media/3D/index.html>
+Walrus requires JDK 1.8.0 (or later).
 
 JDK:     <http://java.sun.com/j2se/>
 
@@ -156,9 +159,6 @@ DirectX version, which has problems on this platform.
 Linux users: We, as well as others, have had problems running Java3D on
 an NVIDIA card.  Using JDK 1.4 and Java3D 1.3.1beta seems to help, but
 you may still experience instability.
-
-Mac OS X 10.11.6 users: Oracle's Java might cause problems with Java3D and
-AWT. Using Apple's JDK 1.6.0_65 may prevent these errors.
 
 Walrus was developed and tested on a Sun Ultra 60 with an Elite 3D card
 and 512MB of RAM, running Solaris 7, a box graciously donated by Sun.
@@ -202,35 +202,35 @@ QUICK START
 
 You can give Walrus a quick try by doing the following:
 
-1. Extract 'walrus-0.6.3.tar.gz' or 'walrus-0.6.3.zip' anywhere you wish.
-   This will create a subdirectory named 'walrus-0.6.3' containing several
+1. Extract 'walrus-1.0.0.tar.gz' or 'walrus-1.0.0.zip' anywhere you wish.
+   This will create a subdirectory named 'walrus-1.0.0' containing several
    JAR files, among other things.
 
     For UNIX users...
 
-      The file walrus-0.6.3.tar.gz was packaged with the standard TAR utility
+      The file walrus-1.0.0.tar.gz was packaged with the standard TAR utility
       and compressed with GNU GZIP (http://www.gzip.org).  You can unpack
       it with the following command:
 
-          gzip -cd walrus-0.6.3.tar.gz | tar xvf -
+          gzip -cd walrus-1.0.0.tar.gz | tar xvf -
 
     For Windows users...
 
-      The file walrus-0.6.3.zip was packaged in the common ZIP format.  You
+      The file walrus-1.0.0.zip was packaged in the common ZIP format.  You
       can unpack it using a program like WinZip (http://www.winzip.com/).
 
-2. From the 'walrus-0.6.3' subdirectory, enter the following at a shell
+2. From the 'walrus-1.0.0' subdirectory, enter the following at a shell
    or command prompt:
 
      * on UNIX systems with Sun's JDK:
 
-         java -cp mp.jar:antlrall-mod.jar:libsea.jar:walrus.jar H3Main
+         java -cp lib/*:. H3Main
 
          (Or execute the supplied script: ./walrus)
 
      * on Windows with Sun's JDK:
 
-         java -cp mp.jar;antlrall-mod.jar;libsea.jar;walrus.jar H3Main
+         java -cp lib/*:. H3Main
 
 3. Select the menu item File->Open (that is, 'Open' under the 'File' menu),
    and load the file 'champagne.graph' in the 'samples' subdirectory.
@@ -306,24 +306,24 @@ commands and menus not covered here.
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 BUILDING AND RUNNING
 
-The following process is for Mac OS X 10.11.6 users:
+The following process is for Mac OS X 10.14.5 users:
 
 1. Download the source code from the following link:
 
      <https://www.caida.org/tools/visualization/walrus/#download>
 
-   It is available as walrus-0.6.3-src.tar.gz or walrus-0.6.3-src.zip. You
-   may unpack walrus-0.6.3-src.tar.gz by using the following command:
+   It is available as walrus-1.0.0-src.tar.gz or walrus-1.0.0-src.zip. You
+   may unpack walrus-1.0.0-src.tar.gz by using the following command:
 
-         gzip -cd walrus-0.6.3-src.tar.gz | tar xvf -
+         gzip -cd walrus-1.0.0-src.tar.gz | tar xvf -
 
-   The walrus-0.6.3-src.zip can be unzipped using a program of your choice.
+   The walrus-1.0.0-src.zip can be unzipped using a program of your choice.
 
-   By unpacking either walrus-0.6.3-src.tar.gz or walrus-0.6.3-src.zip, a
-   subdirectory called 'walrus-0.6.3-src' will be created. This directory,
-   walrus-0.6.3-src, will have three JAR files (antlrall-mod.jar,
+   By unpacking either walrus-1.0.0-src.tar.gz or walrus-1.0.0-src.zip, a
+   subdirectory called 'walrus-1.0.0-src' will be created. This directory,
+   walrus-1.0.0-src, will have three JAR files (antlrall-mod.jar,
    libsea.jar, mp.jar) that will be mentioned later. The subdirectory of
-   walrus-0.6.3-src named 'Walrus' contains the source code.
+   walrus-1.0.0-src named 'Walrus' contains the source code.
 
    Alternatively, you may download the source code from this link:
 
@@ -335,32 +335,31 @@ The following process is for Mac OS X 10.11.6 users:
    In this section, the directory containing the source code will be further
    referred to as the Walrus directory.
 
+   1.1 Check within folder "/Library/Java/Extensions" to make sure all old java3d package has been removed to avoid package conflict. 
+
 2. Ensure that your machine is using Apple's JDK 1.8 which can be
    downloaded from <https://support.apple.com/kb/dl1572>. If your default JDK
-   is not Apple's JDK 1.6 and that is the only JDK of version 1.6 that you
+   is not Apple's JDK 1.8 and that is the only JDK of version 1.8 that you
    have, define the Java home environment variable to Apple's JDK 1.8.
 
          export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 
-   If your default JDK is not Apple's JDK 1.6 and you have multiple JDKs of
-   version 1.6, examine all JDKs you have installed.
+   If your default JDK is not Oracle's JDK 1.8 and you have multiple JDKs of
+   version 1.8, examine all JDKs you have installed.
 
          /usr/libexec/java_home -V
 
    The above command will output a list of your JDKs with the version of
-   each JDK listed as the first part on each line. Determine the version
-   for Apple's JDK 1.6 and define the Java home environment variable to
-   that specific JDK. For example, if the version for Apple's JDK was
-   1.6.0_65-b14-468, the command would look like this:
+   each JDK listed as the first part on each line. Determine the version for Oracle's JDK 1.8 and define the Java home environment variable to that specific JDK. For example, if the version for Apple's JDK was 1.8.0_111, the command would look like this:
 
-         export JAVA_HOME=$(/usr/libexec/java_home -v 1.6.0_65-b14-468)
+        export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_111)
 
 3. In your Bash shell from the Walrus directory, include the current
    directory and the path to each of the three JAR files in the classpath
    environment variable. If each jar file was one directory above the
    Walrus directory, the command would be:
 
-         export CLASSPATH=../antlrall-mod.jar:../libsea.jar:../mp.jar:../j3dcore.jar:../j3dutils.jar:../vecmath.jar:../jogamp-fat.jar:.
+         export CLASSPATH="lib/*:."
 
 4. From the Walrus directory, run this command to build Walrus:
 
@@ -371,7 +370,12 @@ The following process is for Mac OS X 10.11.6 users:
    classes. If all three JAR files were in the Walrus directory, the
    command would be:
 
-         java -cp antlrall-mod.jar:libsea.jar:mp.jar:j3dcore.jar:j3dutils.jar:vecmath.jar:jogamp-fat.jar:. H3Main
+         java -cp lib/*:. H3Main
+    
+    5.1 If terminal reports error such as no package or method found, try
+    copy all Java3d releated package from lib to "/Library/Java/Extensions". 
+
+    Java3d related packages are: j3dcore.jar, j3dutils.jar, vecmath.jar, jogamp-fat.jar
 
 6. If you wish to build a JAR file to distribute, run the following
    command:
@@ -380,6 +384,9 @@ The following process is for Mac OS X 10.11.6 users:
 
    The created JAR file will be called 'walrus.jar'. To run Walrus with
    walrus.jar, follow the instructions in the Quick Start section.
+
+   This command currrently not working as the building tool cannot
+   correctly recognize libsea.jar
 
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -400,7 +407,7 @@ The directory 'samples' contains the following sample graphs.
 
      A graph file generated from the UNIX directory tree containing the
      Walrus source files.  This was generated using the perl scripts
-     included in 'walrus-0.6.3/docs/dirgraph'.
+     included in 'walrus/docs/dirgraph'.
 
      Many of the values shown in a directory listing are included in this
      graph file as attributes.  For example, the attribute 'full_name'

@@ -8,7 +8,7 @@
 
 JAVA = java
 JAVAC = javac
-JAVAC_FLAGS = #-classpath $$CLASSPATH
+JAVAC_FLAGS = -classpath $$CLASSPATH
 
 #############################################################################
 # NO FURTHER CONFIGURATION OPTIONS BELOW
@@ -73,7 +73,7 @@ pedantic:
 	$(MAKE) JAVAC=jikes JAVAC_FLAGS=+P
 
 jar:
-	jar cvmf distrib/manifest-supplement walrus.jar *.class walrus-splash.jpg
+	jar cvmf distrib/manifest-supplement walrus.jar *.class walrus-splash.jpg lib/* 
 
 clean:
 	-rm *.class *~
